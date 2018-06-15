@@ -33,7 +33,9 @@
 % false.
 %
 page_in_category(PName, CatId) :-
-	writeln(unimplemented).
+    category(CatId, CatTitle , false), % Assures the category is visible (not hidden)
+    page(PId, _, PName, _),
+    categorylinks(PId, CatTitle).
 
 % Signature: splitter_category(CategoryId)/1
 % Purpose: A category that has at least two pages.
@@ -50,7 +52,27 @@ page_in_category(PName, CatId) :-
 % false.
 %
 splitter_category(CatId) :-
-	writeln(unimplemented).
+    category(CatId, CatTitle , _),
+    
+    categorylinks(X, CatTitle),
+    categorylinks(Y, CatTitle),
+    X \= Y.
+
+
+
+has_unexcluded_pages(NamespaceId, ExclusionList) :-
+    page(Pid, NamespaceId, _, _),
+    \+ member(Pid, ExclusionList).
+namespace_list_exclude(NamespaceId, ExclusionList, []) :-
+    \+ has_unexcluded_pages(NamespaceId, ExclusionList).
+        
+namespace_list_exclude(NamespaceId, ExclusionList, ResultList) :-
+    page(Pid, NamespaceId, _, _),
+    \+ member(Pid, ExclusionList),
+    append([Pid], ExclusionList, ExclusionListExtended),
+
+    namespace_list_exclude(NamespaceId, ExclusionListExtended, RecursionValue),    
+    append([Pid], RecursionValue, ResultList).
 
 % Signature: namespace_list(NamespaceName, PageList)/2
 % Purpose: PageList includes all the pages in namespace NamespaceName.
@@ -60,4 +82,10 @@ splitter_category(CatId) :-
 % X = [558585, 689695, 858585].
 %
 namespace_list(Name, PageList) :-
-	writeln(unimplemented).
+    namespaces(NamespaceId, Name),
+    namespace_list_exclude(NamespaceId, [], PageList).
+
+    %findall(Pid, page(Pid, NamespaceId, PName, _) , PageList).
+    
+
+    
