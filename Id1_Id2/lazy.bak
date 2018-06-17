@@ -62,12 +62,7 @@
 ; Part 3: The assignment ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(define take1 (lambda (list predicate)
-                (if (and (not(empty-lzl? list))(predicate(head list)))
-                (cons (head list) (take1 (tail list) predicate))
-                '()
-               )))
-                
+(define take1 (lambda (x y) 'TODO))
 
 ;;;;;;;;;;;;;;;;;;;;;
 ; Part 4: The tests ;
