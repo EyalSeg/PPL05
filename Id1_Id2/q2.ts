@@ -26,8 +26,18 @@ export const t3: Tree = {children: [
 
 
 export const leftMostEven1 = (atree: Tree): number => {
-  // your code here
-  return 0;
+    if (isTreeLeaf(atree)){
+      return atree.value % 2 === 0? 
+        atree.value :
+        -1
+    }
+
+    let recursive = atree.children.map(leftMostEven1);
+    let evens = recursive.filter((x) => x !== -1)
+
+    return evens.length === 0 ? 
+      -1 :
+      evens[0]
 }
 
 
@@ -40,9 +50,33 @@ export const leftMostEven2 = (atree: Tree): number =>
 
 const leftMostEven$ = <T1, T2>(atree: Tree,
                                succ: ((x:number) => T1),
-                               fail: (() => T2)): (T1 | T2) =>
-    // your code here
-    fail();
+                               fail: (() => T2)): (T1 | T2) => {
+                                  
+  if (isTreeLeaf(atree))
+    return atree.value % 2 === 0?
+      succ(atree.value) :
+      fail()
+  
+  if (atree.children.length === 0)
+    return fail()
+  
+  let tree_without_left = {children: atree.children.slice(1)}
 
+  return leftMostEven$(atree.children[0],
+               (x) => {return succ(x)},
+               () => leftMostEven$(tree_without_left, succ, fail) )
+}
+
+
+    // if tree: succ(x) if even, fail if odd
+    // if not tree: go over the 1st child with succ, fail Recursivly go over the children (by splitting the children array)
+
+
+    console.log(leftMostEven1(t1))
+    console.log(leftMostEven1(t2))
+    console.log(leftMostEven1(t3))
+    console.log(leftMostEven2(t1))
+    console.log(leftMostEven2(t2))
+    console.log(leftMostEven2(t3))
 
 
