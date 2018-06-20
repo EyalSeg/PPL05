@@ -1,3 +1,9 @@
+:- module('q6', 
+	[sub/2]).
+
+
+
+
 % Signature: sub(Sublist, List)/2
 % Purpose: All elements in Sublist appear in List in the same order. 
 % Precondition: List is fully instantiated (queries do not include variables in their first argument). 

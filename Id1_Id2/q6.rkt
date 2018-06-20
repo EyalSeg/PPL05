@@ -1,6 +1,7 @@
 #lang racket
 (require racket/sandbox)
 (require racket/exn)
+(provide (all-defined-out))
 
 
 ;; Signature: take(lz-lst,n)
@@ -85,7 +86,7 @@
 (define all-subs
   (lambda (long)
     (if (empty? long)
-        empty-lzl
+        (cons-lzl '() (lambda () empty-lzl)) ;return a lazy list containing only an empty list
         (let ([head (head long)]
               [recursive-subsets (all-subs (cdr long))])
           (join-lazy recursive-subsets (lazy-append-to-all-subsets head recursive-subsets))
