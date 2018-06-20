@@ -1,4 +1,4 @@
-// q2.ts
+  // q2.ts
 
 export interface TreeNode {
   children: Tree[];
@@ -67,16 +67,5 @@ const leftMostEven$ = <T1, T2>(atree: Tree,
                () => leftMostEven$(tree_without_left, succ, fail) )
 }
 
-
-    // if tree: succ(x) if even, fail if odd
-    // if not tree: go over the 1st child with succ, fail Recursivly go over the children (by splitting the children array)
-
-
-    console.log(leftMostEven1(t1))
-    console.log(leftMostEven1(t2))
-    console.log(leftMostEven1(t3))
-    console.log(leftMostEven2(t1))
-    console.log(leftMostEven2(t2))
-    console.log(leftMostEven2(t3))
 
 

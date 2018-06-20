@@ -4,7 +4,10 @@
  * **********************************************
  */
 :- use_module('ex5-aux').
-
+:- module('q3', 
+	[page_in_category/2,
+	splitter_category/1,
+	namespace_list/2]).
 /*
  * **********************************************
  * Question 3:

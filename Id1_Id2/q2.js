@@ -40,12 +40,4 @@ const leftMostEven$ = (atree, succ, fail) => {
     let tree_without_left = { children: atree.children.slice(1) };
     return leftMostEven$(atree.children[0], (x) => { return succ(x); }, () => leftMostEven$(tree_without_left, succ, fail));
 };
-// if tree: succ(x) if even, fail if odd
-// if not tree: go over the 1st child with succ, fail Recursivly go over the children (by splitting the children array)
-console.log(exports.leftMostEven1(exports.t1));
-console.log(exports.leftMostEven1(exports.t2));
-console.log(exports.leftMostEven1(exports.t3));
-console.log(exports.leftMostEven2(exports.t1));
-console.log(exports.leftMostEven2(exports.t2));
-console.log(exports.leftMostEven2(exports.t3));
 //# sourceMappingURL=q2.js.map

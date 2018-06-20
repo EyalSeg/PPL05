@@ -2,6 +2,8 @@
 (require racket/sandbox)
 (require racket/exn)
 
+
+(provide (all-defined-out))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; Part 1: The lazy lists interface ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
